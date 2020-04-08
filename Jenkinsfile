@@ -1,27 +1,4 @@
-
-node{
-
- 
-stage('SCM Checkout'){
- 
-git 'https://github.com/bhanu6549/Jenkins'
-
- 
-}
-
- 
-stage('Compile Package'){
-
- 
-def mvnHome= tool name: 'Maven 3', type: 'maven'
-
- 
-sh "${mvnHome}/bin/mvn package"
-
- 
-}
-  mail bcc: '', body: 'welcome to jenkins', cc: '', from: '', replyTo: '', subject: 'Jenkins', to: 'bhanumindtree2020@gmail.com'
- 
-
- 
-}
+checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/bhanu6549/WebProject.git']]])
+emailext body: 'Test phase', subject: 'Jenkins', to: 'bhanumindtree2020@gmail.com'
+build 'Bhanu-Web-Email-Notification'
+deploy adapters: [tomcat8(path: '', url: 'http://52.177.179.150:8081/')], contextPath: null, war: 'WAR'
