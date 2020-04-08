@@ -20,6 +20,10 @@ sh "${mvnHome}/bin/mvn package"
 
  
 }
+ Stage('email notification')
+ {
+  mail bcc: '', body: 'welcome to jenkins', cc: '', from: '', replyTo: '', subject: 'Jenkins', to: 'bhanumindtree2020@gmail.com'
+ }
 
  
 }
